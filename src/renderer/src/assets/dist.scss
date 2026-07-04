@@ -1,0 +1,179 @@
+@mixin tailwindcss {
+  //! bg-gray-50
+  .bg-gray-50 {
+    background-color: rgb(249 250 251 / 1);
+  }
+
+  //! bg-white
+  .bg-white {
+    background-color: rgb(255 255 255 / 1);
+  }
+
+  //! border-b
+  .border-b {
+    border-bottom-width: 1px;
+  }
+
+  //! cursor-point
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  //! duration-300
+  .duration-300 {
+    transition-duration: 300ms;
+    //! 默认所有可过渡属性都会获得过渡效果
+    //! 默认 transition-property: all;
+  }
+
+  //! flex
+  .flex {
+    display: flex;
+  }
+
+  //! flex-col
+  .flex-col {
+    flex-direction: column;
+  }
+
+  //! gap-2
+  .gap-2 {
+    // gap 设置伸缩项目的间距
+    gap: 0.5rem; // 8px
+  }
+
+  //! h-20
+  .h-20 {
+    height: 5rem; // 80px
+  }
+
+  //! items-center
+  .item-center {
+    // 单行, 侧轴中点对齐 (垂直居中)
+    align-items: center;
+  }
+
+  //! justify-center
+  .justify-center {
+    // 主轴中点对齐 (水平居中)
+    justify-content: center;
+  }
+
+  //! justify-between
+  .justify-between {
+    // 主轴均匀分布: 两端距离等于 0
+    justify-content: space-between;
+  }
+
+  //! m-3
+  .m-3 {
+    margin: 0.75rem; // 12px
+  }
+
+  //! mb-2
+  .mb-2 {
+    margin-bottom: 0.5rem; // 8px
+  }
+
+  //! mt-10
+  .mt-10 {
+    margin-top: 2.5rem; // 40px
+  }
+
+  //! mx-3
+  .mx-3 {
+    margin-left: 0.75rem; // 12px
+    margin-right: 0.75rem; // 12px
+  }
+
+  //! opacity-80
+  .opacity-80 {
+    // 不透明度 80%
+    opacity: 0.8;
+  }
+
+  //! overflow-y-auto
+  .overflow-y-auto {
+    // auto: 内容溢出时, 截断, 显示滚动条
+    overflow-y: hidden;
+  }
+
+  //! p-3
+  .p-3 {
+    padding: 0.75rem; // 12px
+  }
+
+  //! px-3
+  .px-3 {
+    padding-left: 0.75rem; // 12px
+    padding-right: 0.75rem; // 12px
+  }
+
+  //! py-1
+  .py-1 {
+    padding-top: 0.25rem; // 4px
+    padding-bottom: 0.25rem; // 4px
+  }
+
+  //! py-[8px]
+  .py-\[8px\] {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  //! rounded-lg
+  .rounded-lg {
+    border-radius: 0.5rem; // 8px
+  }
+
+  //! scale-125
+  .scale-125 {
+    // translateX 设置水平方向平移
+    // translateY 设置垂直方向平移
+    // scaleX 设置水平方向的缩放比例
+    // scaleY 设置垂直方向的缩放比例
+    // rotate 设置旋转角度
+    transform: translate(0 /* translateX */, 0 /* translateY */) scaleX(1.25) scaleY(1.25) rotate(0);
+  }
+
+  //! shadow-sm, shadow-slate-400 指定阴影颜色
+  .shadow-md {
+    // 任意数量的阴影, 以逗号分隔
+    // 水平偏移 垂直偏移 模糊值 外延值 阴影颜色
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+
+  //! text-slate-600
+  .text-slate-600 {
+    color: rgb(71 85 105 / 1);
+  }
+
+  //! text-sm
+  .text-sm {
+    font-size: 0.875rem; // 14px
+    line-height: 1.25rem; // 20px
+  }
+
+  //! text-xs
+  .text-xs {
+    font-size: 0.75rem; // 12px
+    line-height: 1rem; // 16px
+  }
+
+  //! truncate
+  .truncate {
+    overflow: hidden;
+    /* text-overflow 必须配合 overflow: hidden */
+    // ellipsis 内联内容溢出时, 省略溢出部分 (将溢出部分替换为 ...)
+    text-overflow: ellipsis;
+    // nowrap: 强制不换行
+    white-space: nowrap;
+  }
+
+  //! w-20
+  .w-20 {
+    width: 5rem; // 80px
+  }
+}

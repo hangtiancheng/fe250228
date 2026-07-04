@@ -1,0 +1,21 @@
+body {
+  // background-color: rgb(241 245 249 / 1);
+  @apply bg-slate-100;
+}
+
+// 可拖拽
+@mixin drag {
+  -webkit-app-region: drag;
+}
+
+// 不可拖拽
+@mixin no-drag {
+  -webkit-app-region: no-drag;
+}
+
+// 清除 ElMessage { grouping: true } 时的计数器
+.el-message {
+  .el-badge {
+    display: none !important;
+  }
+}
