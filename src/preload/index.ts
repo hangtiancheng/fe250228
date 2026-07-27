@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron'
+import { contextBridge, ipcRenderer, IpcRendererEvent, webUtils } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 import { IConvertSettings, IVideoItem, VideoState } from '../main/types'
 
@@ -10,6 +10,10 @@ const api = {
 
   selectDir: async (): Promise<string> => {
     return ipcRenderer.invoke('selectDirChan')
+  },
+
+  getFilePath: (file: File): string => {
+    return webUtils.getPathForFile(file)
   },
 
   subscribeMain: (callback: (type_: VideoState, replyVal_?: unknown) => void): void => {

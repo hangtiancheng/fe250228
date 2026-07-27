@@ -1,14 +1,19 @@
-import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { create } from 'zustand'
+import type { IVideoItem, VideoState } from '../types'
 
-import { IVideoItem } from '@renderer/types'
+interface VideoStore {
+  videoList: IVideoItem[]
+  setVideoList: (videoList: IVideoItem[]) => void
+  patchVideo: (filepath: string, patch: Partial<Pick<IVideoItem, 'progress' | 'state'>>) => void
+}
 
-const useVideoStore = defineStore('video', () => {
-  //! state
-  const videoList = ref<IVideoItem[]>([])
-  return {
-    videoList
-  }
-})
+export const useVideoStore = create<VideoStore>()((set) => ({
+  videoList: [],
+  setVideoList: (videoList) => set({ videoList }),
+  patchVideo: (filepath, patch) =>
+    set((s) => ({
+      videoList: s.videoList.map((v) => (v.filepath === filepath ? { ...v, ...patch } : v))
+    }))
+}))
 
-export { useVideoStore }
+export type { IVideoItem, VideoState }

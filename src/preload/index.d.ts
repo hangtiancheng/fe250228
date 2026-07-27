@@ -7,6 +7,7 @@ declare global {
     api: {
       convert: (videoItem: IVideoItem, settings: IConvertSettings) => Promise<void>
       selectDir: () => Promise<string>
+      getFilePath: (file: File) => string
       subscribeMain: (callback: (type: VideoState, replyVal?: unknown) => void) => void
       stop: () => void
     }
