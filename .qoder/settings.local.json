@@ -1,7 +1,5 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(find /Users/hangtiancheng/github/fe250228/src -type f | head -200)"
-    ]
+    "allow": ["Bash(find /Users/hangtiancheng/github/fe250228/src -type f | head -200)"]
   }
 }

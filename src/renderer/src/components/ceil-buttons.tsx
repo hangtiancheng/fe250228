@@ -25,7 +25,7 @@ export default function CeilButtons(): JSX.Element {
   }, [])
 
   return (
-    <section aria-label="添加与转码" className="flex items-center justify-center gap-6 py-1">
+    <section className="flex items-center justify-center gap-6 py-1">
       <input
         ref={inputRef}
         type="file"
@@ -40,7 +40,6 @@ export default function CeilButtons(): JSX.Element {
 
       <button
         type="button"
-        aria-label="添加视频"
         title="点击或拖入视频文件"
         onClick={() => inputRef.current?.click()}
         onDragOver={(e) => {
@@ -59,12 +58,11 @@ export default function CeilButtons(): JSX.Element {
             : 'border-ink-600'
         }`}
       >
-        <Plus size={42} aria-hidden="true" />
+        <Plus size={42} />
       </button>
 
       <button
         type="button"
-        aria-label="开始转码"
         title="开始转码"
         disabled={isConverting}
         onClick={startConvert}
@@ -74,7 +72,7 @@ export default function CeilButtons(): JSX.Element {
             : 'cursor-pointer border-ink-600 text-slate-300 hover:border-amber-glow hover:text-amber-glow'
         }`}
       >
-        <RotateCw size={42} aria-hidden="true" className={isConverting ? 'animate-spin' : ''} />
+        <RotateCw size={42} className={isConverting ? 'animate-spin' : ''} />
       </button>
     </section>
   )

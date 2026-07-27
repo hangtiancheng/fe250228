@@ -39,14 +39,13 @@ export default function SettingsContent({ type, placeholder }: SettingsContentPr
             <span>{option.label}</span>
             <button
               type="button"
-              aria-label={`删除 ${option.label}`}
               onClick={(e) => {
                 e.stopPropagation()
                 removeItem(type, index)
               }}
               className="flex cursor-pointer items-center border-0 bg-transparent p-0.5 text-slate-500 hover:text-rose-400"
             >
-              <XCircle size={14} aria-hidden="true" />
+              <XCircle size={14} />
             </button>
           </span>
         )}

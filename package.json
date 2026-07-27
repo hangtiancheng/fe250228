@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "fe250228",
   "main": "./out/main/index.js",
+  "type": "module",
   "author": "https://github.com/hangtiancheng",
   "homepage": "https://github.com/hangtiancheng/fe250228",
   "scripts": {
@@ -39,6 +40,7 @@
     "@electron-toolkit/eslint-config": "^2.1.0",
     "@electron-toolkit/eslint-config-ts": "^3.1.0",
     "@electron-toolkit/tsconfig": "^2.0.0",
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/fluent-ffmpeg": "^2.1.28",
     "@types/node": "^24.13.3",
     "@types/react": "^18.3.31",

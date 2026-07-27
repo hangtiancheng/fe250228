@@ -10,7 +10,7 @@ export default function BasicSettings(): JSX.Element {
   const setFrame = useSettingsStore((s) => s.setFrame)
 
   return (
-    <section aria-label="基础设置" className="flex gap-2">
+    <section className="flex gap-2">
       <Select
         className="flex-1"
         value={size}

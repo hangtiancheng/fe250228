@@ -16,16 +16,15 @@ export default function NavigationBar({ view, onNavigate }: NavigationBarProps):
         onClick={() => onNavigate('home')}
         className="no-drag flex cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-sm font-semibold tracking-widest text-slate-100"
       >
-        <span aria-hidden="true" className="h-2 w-2 animate-pulse rounded-full bg-amber-glow" />
+        <span className="h-2 w-2 animate-pulse rounded-full bg-amber-glow" />
         视频转码
       </button>
 
-      <nav aria-label="页面导航" className="no-drag flex items-center gap-1">
+      <nav className="no-drag flex items-center gap-1">
         {links.map((link) => (
           <button
             key={link.key}
             type="button"
-            aria-current={view === link.key ? 'page' : undefined}
             onClick={() => onNavigate(link.key)}
             className={`cursor-pointer rounded-md border-0 px-2.5 py-1 text-xs transition-colors ${
               view === link.key

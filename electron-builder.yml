@@ -1,4 +1,4 @@
-appId: com.github.hangtiancheng.fe250228
+appId: com.hangtiancheng.fe250228
 productName: fe250228
 directories:
   buildResources: build
@@ -6,11 +6,14 @@ files:
   - '!**/.vscode/*'
   - '!src/*'
   - '!electron.vite.config.{js,ts,mjs,cjs}'
-  - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc,dev-app-update.yml,CHANGELOG.md,README.md}'
-  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
+  - '!{.eslintcache,eslint.config.mjs,prettier.config.mjs,postcss.config.mjs,dev-app-update.yml,CHANGELOG.md,README.md,LICENSE}'
+  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml,pnpm-workspace.yaml}'
   - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
 asarUnpack:
   - resources/**
+  # fw.ts 将 app.asar 路径替换为 app.asar.unpacked, ffmpeg/ffprobe 二进制必须解包
+  - node_modules/@ffmpeg-installer/**
+  - node_modules/@ffprobe-installer/**
 win:
   executableName: fe250228
 nsis:
@@ -21,10 +24,8 @@ nsis:
 mac:
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:
-    - NSCameraUsageDescription: Application requests access to the device's camera.
-    - NSMicrophoneUsageDescription: Application requests access to the device's microphone.
-    - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
-    - NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
+    NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
+    NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
   notarize: false
 dmg:
   artifactName: ${name}-${version}.${ext}
@@ -33,11 +34,14 @@ linux:
     - AppImage
     - snap
     - deb
-  maintainer: electronjs.org
+  maintainer: https://github.com/hangtiancheng
   category: Utility
 appImage:
   artifactName: ${name}-${version}.${ext}
 npmRebuild: false
 publish:
-  provider: generic
-  url: https://github.com/hangtiancheng/fe250228
+  provider: github
+  owner: hangtiancheng
+  repo: fe250228
+electronDownload:
+  mirror: https://npmmirror.com/mirrors/electron/

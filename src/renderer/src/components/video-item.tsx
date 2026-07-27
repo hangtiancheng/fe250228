@@ -20,7 +20,6 @@ export default function VideoItem({ video, idx }: VideoItemProps): JSX.Element {
   return (
     <li className="relative overflow-hidden rounded-lg border border-ink-600/50 bg-ink-800">
       <div
-        aria-hidden="true"
         className={`absolute inset-y-0 left-0 transition-[width] duration-300 ${meta.fill}`}
         style={{ width: `${video.progress}%` }}
       />
@@ -35,11 +34,10 @@ export default function VideoItem({ video, idx }: VideoItemProps): JSX.Element {
         </div>
         <button
           type="button"
-          aria-label={`删除 ${video.filename}`}
           onClick={() => removeVideo(idx)}
           className="flex cursor-pointer items-center border-0 bg-transparent p-1 text-slate-500 transition-transform hover:scale-125 hover:text-rose-400"
         >
-          <XCircle size={18} aria-hidden="true" />
+          <XCircle size={18} />
         </button>
       </div>
     </li>

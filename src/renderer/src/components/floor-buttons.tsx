@@ -6,7 +6,7 @@ export default function FloorButtons(): JSX.Element {
   const isConverting = useConvertStore((s) => s.isConverting)
 
   return (
-    <section aria-label="批量操作" className="flex justify-center gap-2">
+    <section className="flex justify-center gap-2">
       <Button size="small" type="primary" onClick={stopConvert}>
         结束转码
       </Button>
