@@ -13,7 +13,7 @@ export default function VideoList(): JSX.Element {
   }
 
   return (
-    <ul className="m-0 flex h-80 list-none flex-col gap-1.5 overflow-y-auto p-0 pr-0.5">
+    <ul className="m-0 flex h-80 list-none flex-col gap-1.5 overflow-y-auto overscroll-contain p-0 pr-0.5">
       {videoList.map((video, idx) => (
         <VideoItem key={video.filepath} video={video} idx={idx} />
       ))}

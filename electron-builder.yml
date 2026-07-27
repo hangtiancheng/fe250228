@@ -11,7 +11,7 @@ files:
   - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
 asarUnpack:
   - resources/**
-  # fw.ts 将 app.asar 路径替换为 app.asar.unpacked, ffmpeg/ffprobe 二进制必须解包
+  # fw.ts rewrites app.asar paths to app.asar.unpacked, so the ffmpeg/ffprobe binaries must stay unpacked
   - node_modules/@ffmpeg-installer/**
   - node_modules/@ffprobe-installer/**
 win:

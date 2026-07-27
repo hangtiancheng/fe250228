@@ -2,7 +2,7 @@ import { contextBridge, ipcRenderer, IpcRendererEvent, webUtils } from 'electron
 import { electronAPI } from '@electron-toolkit/preload'
 import { IConvertSettings, IVideoItem, VideoState } from '../main/types'
 
-//! 在渲染器进程中, 选择性暴露主进程 API
+//! Selectively expose main-process APIs to the renderer
 const api = {
   convert: async (videoItem: IVideoItem, settings: IConvertSettings): Promise<void> => {
     return ipcRenderer.invoke('convertChan', videoItem, settings)
@@ -33,8 +33,8 @@ const api = {
   }
 }
 
-// 开启上下文隔离 context isolation 时，才需要使用 contextBridge 将 electron API 暴露给渲染器进程
-// 否则只需要直接添加到 DOM 元素中
+// With context isolation enabled, electron APIs must be exposed to the renderer via contextBridge
+// Otherwise they can be attached to the global window directly
 if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI)

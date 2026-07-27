@@ -53,7 +53,7 @@ export default class FfmpegWrapper {
       .videoCodec('libx264')
       .size(this.settings.size)
       .fps(this.settings.frame)
-      //! 必须 .bind(this)
+      //! .bind(this) is required
       .on('progress', this.convertCallback.bind(this))
       .on('error', this.errorCallback.bind(this))
       .on('end', this.doneCallback.bind(this))

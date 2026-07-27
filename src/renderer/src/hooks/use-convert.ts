@@ -10,7 +10,7 @@ interface ConvertStore {
 
 export const useConvertStore = create<ConvertStore>()(() => ({ isConverting: false }))
 
-// 当前正在转码的视频路径 (单任务串行队列)
+// Filepath of the video currently being converted (single-task serial queue)
 let convertingFilepath = ''
 let subscribed = false
 
@@ -31,7 +31,7 @@ function callConvert(): void {
   convertingFilepath = video.filepath
   patchVideo(video.filepath, { state: 'convert', progress: 0 })
   const { size, frame, outputDir } = useSettingsStore.getState()
-  // 展开为普通对象, 满足 structured clone
+  // Spread into a plain object so it survives structured clone
   window.api.convert({ ...video, state: 'convert' }, { size, frame, outputDir })
 }
 
@@ -39,7 +39,8 @@ export function stopConvert(): void {
   window.api.stop()
 }
 
-// 只注册一次主进程推送订阅 (preload 无取消订阅能力, 需防 StrictMode 重复注册)
+// Register the main-process push subscription exactly once
+// (preload provides no unsubscribe; guards against double registration under StrictMode)
 export function subscribeMainOnce(): void {
   if (subscribed) return
   subscribed = true
@@ -70,7 +71,7 @@ export function subscribeMainOnce(): void {
         const { code, detail } = replyVal as ErrorReplyVal
         useConvertStore.setState({ isConverting: false })
         if (code === 0x0) {
-          // 输出目录缺失, 回退为 Downloads 目录并提示重新选择
+          // Output dir is missing: fall back to the Downloads dir and prompt for reselection
           patchVideo(convertingFilepath, { state: 'pending', progress: 0 })
           useSettingsStore.getState().setOutputDir(detail ?? '')
           feedback.message.error({ content: '请选择输出目录', key: 'convert' })

@@ -20,8 +20,8 @@ export default function VideoItem({ video, idx }: VideoItemProps): JSX.Element {
   return (
     <li className="relative overflow-hidden rounded-lg border border-ink-600/50 bg-ink-800">
       <div
-        className={`absolute inset-y-0 left-0 transition-[width] duration-300 ${meta.fill}`}
-        style={{ width: `${video.progress}%` }}
+        className={`absolute inset-0 origin-left transition-transform duration-300 ${meta.fill}`}
+        style={{ transform: `scaleX(${video.progress / 100})` }}
       />
       <div className="relative flex items-center gap-2 px-2.5 py-2">
         <div className="min-w-0 flex-1">
