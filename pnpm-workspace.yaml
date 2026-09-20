@@ -1,0 +1,13 @@
+allowBuilds:
+  '@ffmpeg-installer/darwin-arm64': true
+  '@ffprobe-installer/darwin-arm64': true
+  '@parcel/watcher': set this to true or false
+  electron-winstaller: true
+  esbuild: true
+onlyBuiltDependencies:
+  - '@ffmpeg-installer/darwin-arm64'
+  - '@ffprobe-installer/darwin-arm64'
+  - '@parcel/watcher'
+  - electron
+  - esbuild
+  - vue-demi
