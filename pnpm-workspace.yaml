@@ -1,7 +1,6 @@
 allowBuilds:
   '@ffmpeg-installer/darwin-arm64': true
   '@ffprobe-installer/darwin-arm64': true
-  '@parcel/watcher': set this to true or false
   electron-winstaller: true
   esbuild: true
 onlyBuiltDependencies:
