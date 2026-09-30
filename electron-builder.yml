@@ -1,0 +1,47 @@
+appId: com.hangtiancheng.fe250228
+productName: fe250228
+directories:
+  buildResources: build
+files:
+  - '!**/.vscode/*'
+  - '!src/*'
+  - '!electron.vite.config.{js,ts,mjs,cjs}'
+  - '!{.eslintcache,eslint.config.mjs,prettier.config.mjs,postcss.config.mjs,dev-app-update.yml,CHANGELOG.md,README.md,LICENSE}'
+  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml,pnpm-workspace.yaml}'
+  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+asarUnpack:
+  - resources/**
+  # fw.ts rewrites app.asar paths to app.asar.unpacked, so the ffmpeg/ffprobe binaries must stay unpacked
+  - node_modules/@ffmpeg-installer/**
+  - node_modules/@ffprobe-installer/**
+win:
+  executableName: fe250228
+nsis:
+  artifactName: ${name}-${version}-setup.${ext}
+  shortcutName: ${productName}
+  uninstallDisplayName: ${productName}
+  createDesktopShortcut: always
+mac:
+  entitlementsInherit: build/entitlements.mac.plist
+  extendInfo:
+    NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
+    NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
+  notarize: false
+dmg:
+  artifactName: ${name}-${version}.${ext}
+linux:
+  target:
+    - AppImage
+    - snap
+    - deb
+  maintainer: https://github.com/hangtiancheng
+  category: Utility
+appImage:
+  artifactName: ${name}-${version}.${ext}
+npmRebuild: false
+publish:
+  provider: github
+  owner: hangtiancheng
+  repo: fe250228
+electronDownload:
+  mirror: https://npmmirror.com/mirrors/electron/
