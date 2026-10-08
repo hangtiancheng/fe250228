@@ -7,21 +7,17 @@
   --color-ink-700: #1e2029;
   --color-ink-600: #2a2d3a;
   --color-amber-glow: #f5a623;
+
+  --font-sans:
+    'Yukino', 'Maple Mono', Menlo, 'Cascadia Code', 'Sarasa Gothic SC', 'PingFang SC',
+    'Microsoft YaHei', sans-serif;
+  --font-mono:
+    'Yukino', 'Maple Mono', Menlo, 'Cascadia Code', 'Sarasa Gothic SC', 'PingFang SC',
+    'Microsoft YaHei', monospace;
 }
 
 :root {
   color-scheme: dark;
-}
-
-body {
-  @apply overflow-hidden bg-ink-900 text-slate-200 antialiased select-none;
-  font-family:
-    'PingFang SC',
-    'Hiragino Sans GB',
-    'Microsoft YaHei',
-    -apple-system,
-    'Segoe UI',
-    sans-serif;
 }
 
 /* Amber ambient glow at the top */
