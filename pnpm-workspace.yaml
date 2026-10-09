@@ -6,3 +6,5 @@ allowBuilds:
   electron-winstaller: true
   esbuild: true
   vue-demi: true
+
+minimumReleaseAge: 0
