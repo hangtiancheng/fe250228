@@ -1,10 +1,3 @@
-// export const enum VideoState {
-//   PENDING = 'pending',
-//   CONVERT = 'convert',
-//   DONE = 'done',
-//   ERROR = 'error'
-// }
-
 export type VideoState = 'pending' | 'convert' | 'done' | 'error'
 
 export interface IConvertSettings {
@@ -14,7 +7,7 @@ export interface IConvertSettings {
 }
 
 export interface IVideoItem {
-  filename: string // with ext
+  filename: string
   filepath: string
   progress: number
   state: VideoState

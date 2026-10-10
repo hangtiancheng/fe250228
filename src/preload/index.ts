@@ -2,7 +2,6 @@ import { contextBridge, ipcRenderer, IpcRendererEvent, webUtils } from 'electron
 import { electronAPI } from '@electron-toolkit/preload'
 import { IConvertSettings, IVideoItem, VideoState } from '../main/types'
 
-//! Selectively expose main-process APIs to the renderer
 const api = {
   convert: async (videoItem: IVideoItem, settings: IConvertSettings): Promise<void> => {
     return ipcRenderer.invoke('convertChan', videoItem, settings)
@@ -33,8 +32,6 @@ const api = {
   }
 }
 
-// With context isolation enabled, electron APIs must be exposed to the renderer via contextBridge
-// Otherwise they can be attached to the global window directly
 if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI)

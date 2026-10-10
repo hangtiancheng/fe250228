@@ -7,7 +7,7 @@ export interface IConvertSettings {
 }
 
 export interface IVideoItem {
-  filename: string // with ext
+  filename: string
   filepath: string
   progress: number
   state: VideoState

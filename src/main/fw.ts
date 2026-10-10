@@ -14,27 +14,20 @@ export default class FfmpegWrapper {
   private window: BrowserWindow
   private outputPath: string | undefined = undefined
 
-  /**
-   *
-   * @param event IpcMainInvokeEvent
-   * @param filepath The filepath of an IVideoItem instance
-   * @param settings Convert settings
-   */
   constructor(
     private event: IpcMainInvokeEvent,
     private videoItem: IVideoItem,
     private settings: IConvertSettings
   ) {
-    this.ffmpeg = ffmpeg(this.videoItem.filepath /** input */)
+    this.ffmpeg = ffmpeg(this.videoItem.filepath)
     this.window = BrowserWindow.fromWebContents(this.event.sender)!
   }
 
-  //! Methods
   private setOutputPath() {
     const { size, frame } = this.settings
-    const { name /** ext: extWithDot */ } = path.parse(this.videoItem.filename)
+    const { name } = path.parse(this.videoItem.filename)
     if (!this.settings.outputDir || !existsSync(this.settings.outputDir!)) {
-      this.window.webContents.send('mainPublishChan' /** channel */, 'error' /** type */, {
+      this.window.webContents.send('mainPublishChan', 'error', {
         code: 0x0,
         detail: app.getPath('downloads')
       } as ErrorReplyVal)
@@ -53,14 +46,12 @@ export default class FfmpegWrapper {
       .videoCodec('libx264')
       .size(this.settings.size)
       .fps(this.settings.frame)
-      //! .bind(this) is required
       .on('progress', this.convertCallback.bind(this))
       .on('error', this.errorCallback.bind(this))
       .on('end', this.doneCallback.bind(this))
       .save(this.outputPath)
   }
 
-  //! Event callbacks
   convertCallback(progress: {
     frames: number
     currentFps: number
@@ -69,17 +60,7 @@ export default class FfmpegWrapper {
     timemark: string
     percent?: number | undefined
   }) {
-    // const { frames, currentFps, currentKbps, targetSize, timemark, percent } = progress
-    // console.log(
-    //   `Processing: ${percent}%, details:
-    // frame: ${frames}, currentFps: ${currentFps}, currentKps: ${currentKbps}, targetSize: ${targetSize}, timemark: ${timemark}`
-    // )
-    //! console.log(this)
-    this.window.webContents.send(
-      'mainPublishChan' /** channel */,
-      'convert' /** type */,
-      progress.percent /** replyVal */
-    )
+    this.window.webContents.send('mainPublishChan', 'convert', progress.percent)
   }
 
   errorCallback(err: Error) {
@@ -92,16 +73,12 @@ export default class FfmpegWrapper {
   }
 
   doneCallback() {
-    this.window.webContents.send(
-      'mainPublishChan' /** channel */,
-      'done' /** type */,
-      this.videoItem.filepath
-    )
+    this.window.webContents.send('mainPublishChan', 'done', this.videoItem.filepath)
   }
 
   stop() {
     this.ffmpeg.kill('SIGKILL')
-    this.window.webContents.send('mainPublishChan' /** channel */, 'error' /** type */, {
+    this.window.webContents.send('mainPublishChan', 'error', {
       code: 0x1
     } as ErrorReplyVal)
   }

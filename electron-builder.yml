@@ -11,7 +11,6 @@ files:
   - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
 asarUnpack:
   - resources/**
-  # fw.ts rewrites app.asar paths to app.asar.unpacked, so the ffmpeg/ffprobe binaries must stay unpacked
   - node_modules/@ffmpeg-installer/**
   - node_modules/@ffprobe-installer/**
 win:

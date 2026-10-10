@@ -13,11 +13,11 @@ ipcMain.handle(
     settings: IConvertSettings
   ): Promise<void> => {
     ffmpegWrapper = new FfmpegWrapper(event, videoItem, settings)
-    /* return */ ffmpegWrapper.convert()
+    ffmpegWrapper.convert()
   }
 )
 
-ipcMain.handle('selectDirChan', async (/** event: IpcMainInvokeEvent */): Promise<string> => {
+ipcMain.handle('selectDirChan', async (): Promise<string> => {
   return selectDir()
 })
 
