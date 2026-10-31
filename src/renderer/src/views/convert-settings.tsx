@@ -1,4 +1,5 @@
 import { FolderIcon, FolderOpenIcon } from 'lucide-react'
+import type { JSX } from 'react'
 
 import SettingsContent from '../components/settings-content'
 import { Button } from '../components/ui/button'

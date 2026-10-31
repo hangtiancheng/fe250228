@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import type { JSX } from 'react'
 
 import ConfirmDialog from './components/confirm-dialog'
 import CopyrightInfo from './components/copyright-info'

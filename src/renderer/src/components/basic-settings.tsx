@@ -1,3 +1,5 @@
+import type { JSX } from 'react'
+
 import { useSettingsStore } from '../store/use-settings-store'
 
 import {
@@ -19,7 +21,14 @@ export default function BasicSettings(): JSX.Element {
 
   return (
     <section className="flex gap-2">
-      <Select value={size} onValueChange={setSize}>
+      <Select
+        value={size}
+        onValueChange={(v) => {
+          if (v != null) {
+            setSize(v)
+          }
+        }}
+      >
         <SelectTrigger className="flex-1">
           <SelectValue placeholder="选择分辨率" />
         </SelectTrigger>
@@ -34,7 +43,14 @@ export default function BasicSettings(): JSX.Element {
         </SelectContent>
       </Select>
 
-      <Select value={frame} onValueChange={setFrame}>
+      <Select
+        value={frame}
+        onValueChange={(v) => {
+          if (v != null) {
+            setFrame(v)
+          }
+        }}
+      >
         <SelectTrigger className="w-28">
           <SelectValue>{(value) => (value == null ? '选择帧数' : `${value} fps`)}</SelectValue>
         </SelectTrigger>

@@ -1,4 +1,5 @@
 import { FilmIcon } from 'lucide-react'
+import type { JSX } from 'react'
 
 import { useVideoStore } from '../store/use-video-store'
 

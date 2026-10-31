@@ -1,4 +1,5 @@
 import { EraserIcon, RotateCcwIcon, StopCircleIcon } from 'lucide-react'
+import type { JSX } from 'react'
 
 import { stopConvert, useConvertStore } from '../hooks/use-convert'
 import { removeAll, resetAll } from '../hooks/use-video'

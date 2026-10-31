@@ -1,6 +1,7 @@
 import { cn } from 'cn'
 import { PlusIcon, RotateCwIcon } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import type { JSX } from 'react'
 
 import { startConvert, subscribeMainOnce, useConvertStore } from '../hooks/use-convert'
 import { addVideo } from '../hooks/use-video'

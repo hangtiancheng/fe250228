@@ -1,5 +1,6 @@
 import { cn } from 'cn'
 import { XIcon } from 'lucide-react'
+import type { JSX } from 'react'
 
 import { removeVideo } from '../hooks/use-video'
 import type { IVideoItem, VideoState } from '../types'

@@ -6,7 +6,7 @@ files:
   - '!**/.vscode/*'
   - '!src/*'
   - '!electron.vite.config.{js,ts,mjs,cjs}'
-  - '!{.eslintcache,eslint.config.mjs,prettier.config.mjs,postcss.config.mjs,dev-app-update.yml,CHANGELOG.md,README.md,LICENSE}'
+  - '!{.eslintcache,eslint.config.mjs,prettier.config.mjs,.prettierignore,postcss.config.mjs,dev-app-update.yml,CHANGELOG.md,README.md}'
   - '!{.env,.env.*,.npmrc,pnpm-lock.yaml,pnpm-workspace.yaml}'
   - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
 asarUnpack:
@@ -42,5 +42,3 @@ publish:
   provider: github
   owner: hangtiancheng
   repo: fe250228
-electronDownload:
-  mirror: https://npmmirror.com/mirrors/electron/

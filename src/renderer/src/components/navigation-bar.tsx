@@ -1,4 +1,5 @@
 import { ClapperboardIcon } from 'lucide-react'
+import type { JSX } from 'react'
 
 import { ToggleGroup, ToggleGroupItem } from './ui/toggle-group'
 

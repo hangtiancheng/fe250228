@@ -1,4 +1,5 @@
 import { CopyrightIcon } from 'lucide-react'
+import type { JSX } from 'react'
 
 export default function CopyrightInfo(): JSX.Element {
   return (

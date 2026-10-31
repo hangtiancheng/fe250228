@@ -1,5 +1,6 @@
 import { XIcon } from 'lucide-react'
 import { useState } from 'react'
+import type { JSX } from 'react'
 
 import { defaultFrameIdx, defaultSizeIdx } from '../constants'
 import { addFrame, addSize, removeItem } from '../hooks/use-settings'
@@ -48,33 +49,53 @@ export default function SettingsContent({ type, placeholder }: SettingsContentPr
 
   return (
     <div className="flex flex-col gap-3">
-      <Select
-        value={current}
-        onValueChange={(v) => {
-          if (isSize) {
-            setSize(String(v))
-          } else {
-            setFrame(Number(v))
-          }
-        }}
-      >
-        <SelectTrigger className="w-full">
-          <SelectValue>
-            {(value: string | number | null) =>
-              value == null ? (isSize ? '选择分辨率' : '选择帧数') : label(value)
+      {isSize ? (
+        <Select
+          value={size}
+          onValueChange={(v) => {
+            if (v != null) {
+              setSize(v)
             }
-          </SelectValue>
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {options.map((v) => (
-              <SelectItem key={v} value={v}>
-                {label(v)}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+          }}
+        >
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="选择分辨率" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {sizeOptions.map((v) => (
+                <SelectItem key={v} value={v}>
+                  {v}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      ) : (
+        <Select
+          value={frame}
+          onValueChange={(v) => {
+            if (v != null) {
+              setFrame(v)
+            }
+          }}
+        >
+          <SelectTrigger className="w-full">
+            <SelectValue>
+              {(value: number | null) => (value == null ? '选择帧数' : `${value} fps`)}
+            </SelectValue>
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {frameOptions.map((v) => (
+                <SelectItem key={v} value={v}>
+                  {`${v} fps`}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      )}
 
       <div className="flex flex-wrap gap-1.5">
         {options.map((v, idx) => (

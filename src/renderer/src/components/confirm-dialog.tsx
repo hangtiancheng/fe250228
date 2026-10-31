@@ -1,3 +1,5 @@
+import type { JSX } from 'react'
+
 import { useConfirmStore } from '../store/use-confirm-store'
 
 import {

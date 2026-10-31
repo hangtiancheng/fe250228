@@ -1,3 +1,5 @@
+import type { JSX } from 'react'
+
 import BasicSettings from '../components/basic-settings'
 import CeilButtons from '../components/ceil-buttons'
 import FloorButtons from '../components/floor-buttons'
