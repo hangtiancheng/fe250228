@@ -9,7 +9,7 @@
   "homepage": "https://github.com/hangtiancheng/fe250228",
   "scripts": {
     "format": "prettier -w .",
-    "lint": "eslint . --fix",
+    "lint": "eslint . --fix --quiet",
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
     "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
     "typecheck": "pnpm typecheck:node && pnpm typecheck:web",
@@ -31,7 +31,6 @@
     "@electron-toolkit/utils": "^4.0.0",
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@ffprobe-installer/ffprobe": "^2.1.2",
-    "antd": "^5.29.3",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.5.1",
     "electron-updater": "^6.8.11",

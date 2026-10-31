@@ -1,6 +1,13 @@
-import { Select } from 'antd'
-
 import { useSettingsStore } from '../store/use-settings-store'
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from './ui/select'
 
 export default function BasicSettings(): JSX.Element {
   const size = useSettingsStore((s) => s.size)
@@ -12,20 +19,35 @@ export default function BasicSettings(): JSX.Element {
 
   return (
     <section className="flex gap-2">
-      <Select
-        className="flex-1"
-        value={size}
-        onChange={setSize}
-        placeholder="选择分辨率"
-        options={sizeOptions.map((v) => ({ value: v, label: v }))}
-      />
-      <Select
-        className="w-28"
-        value={frame}
-        onChange={setFrame}
-        placeholder="选择帧数"
-        options={frameOptions.map((v) => ({ value: v, label: `${v} fps` }))}
-      />
+      <Select value={size} onValueChange={setSize}>
+        <SelectTrigger className="flex-1">
+          <SelectValue placeholder="选择分辨率" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {sizeOptions.map((v) => (
+              <SelectItem key={v} value={v}>
+                {v}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+
+      <Select value={frame} onValueChange={setFrame}>
+        <SelectTrigger className="w-28">
+          <SelectValue>{(value) => (value == null ? '选择帧数' : `${value} fps`)}</SelectValue>
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {frameOptions.map((v) => (
+              <SelectItem key={v} value={v}>
+                {`${v} fps`}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
     </section>
   )
 }

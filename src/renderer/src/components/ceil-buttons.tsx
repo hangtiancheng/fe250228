@@ -1,8 +1,12 @@
-import { Plus, RotateCw } from 'lucide-react'
+import { cn } from 'cn'
+import { PlusIcon, RotateCwIcon } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 import { startConvert, subscribeMainOnce, useConvertStore } from '../hooks/use-convert'
 import { addVideo } from '../hooks/use-video'
+
+import { Button } from './ui/button'
+import { Spinner } from './ui/spinner'
 
 function addFiles(files: FileList | File[]): void {
   for (const file of Array.from(files)) {
@@ -28,7 +32,7 @@ export default function CeilButtons(): JSX.Element {
   }, [])
 
   return (
-    <section className="flex items-center justify-center gap-6 py-1">
+    <section className="flex items-center justify-center gap-5 py-2">
       <input
         ref={inputRef}
         type="file"
@@ -59,28 +63,27 @@ export default function CeilButtons(): JSX.Element {
           setDragOver(false)
           addFiles(e.dataTransfer.files)
         }}
-        className={`bg-ink-800 hover:border-amber-glow hover:text-amber-glow flex h-20 w-20 cursor-pointer items-center justify-center rounded-2xl border border-dashed text-slate-300 transition-all ${
-          dragOver
-            ? 'border-amber-glow text-amber-glow scale-105 shadow-[0_0_24px_rgba(245,166,35,0.25)]'
-            : 'border-ink-600'
-        }`}
+        className={cn(
+          'flex size-20 cursor-pointer items-center justify-center rounded-2xl border border-dashed border-border bg-card text-muted-foreground shadow-sm transition-all duration-200 hover:border-primary hover:text-primary hover:shadow-md',
+          dragOver && 'scale-105 border-primary bg-primary/5 text-primary shadow-md'
+        )}
       >
-        <Plus size={42} />
+        <PlusIcon className="size-9" strokeWidth={1.75} />
       </button>
 
-      <button
+      <Button
         type="button"
         title="开始转码"
         disabled={isConverting}
         onClick={startConvert}
-        className={`bg-ink-800 flex h-20 w-20 items-center justify-center rounded-2xl border border-solid transition-all ${
-          isConverting
-            ? 'border-amber-glow/50 text-amber-glow cursor-wait shadow-[0_0_24px_rgba(245,166,35,0.25)]'
-            : 'border-ink-600 hover:border-amber-glow hover:text-amber-glow cursor-pointer text-slate-300'
-        }`}
+        className="size-20 rounded-2xl"
       >
-        <RotateCw size={42} className={isConverting ? 'animate-spin' : ''} />
-      </button>
+        {isConverting ? (
+          <Spinner className="size-8" />
+        ) : (
+          <RotateCwIcon className="size-8" strokeWidth={1.75} />
+        )}
+      </Button>
     </section>
   )
 }

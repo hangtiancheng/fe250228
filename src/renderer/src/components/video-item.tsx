@@ -1,13 +1,20 @@
-import { XCircle } from 'lucide-react'
+import { cn } from 'cn'
+import { XIcon } from 'lucide-react'
 
 import { removeVideo } from '../hooks/use-video'
 import type { IVideoItem, VideoState } from '../types'
 
-const stateMeta: Record<VideoState, { label: string; fill: string; text: string }> = {
-  pending: { label: '等待', fill: 'bg-transparent', text: 'text-slate-500' },
-  convert: { label: '转码中', fill: 'bg-amber-glow/20', text: 'text-amber-glow' },
-  done: { label: '完成', fill: 'bg-emerald-400/15', text: 'text-emerald-400' },
-  error: { label: '错误', fill: 'bg-rose-400/15', text: 'text-rose-400' }
+import { Badge } from './ui/badge'
+import { Button } from './ui/button'
+
+const stateMeta: Record<
+  VideoState,
+  { label: string; fill: string; badge: 'outline' | 'default' | 'success' | 'destructive' }
+> = {
+  pending: { label: '等待', fill: 'bg-transparent', badge: 'outline' },
+  convert: { label: '转码中', fill: 'bg-primary/10', badge: 'default' },
+  done: { label: '完成', fill: 'bg-success/10', badge: 'success' },
+  error: { label: '错误', fill: 'bg-destructive/10', badge: 'destructive' }
 }
 
 interface VideoItemProps {
@@ -19,29 +26,34 @@ export default function VideoItem({ video, idx }: VideoItemProps): JSX.Element {
   const meta = stateMeta[video.state]
 
   return (
-    <li className="border-ink-600/50 bg-ink-800 relative overflow-hidden rounded-lg border">
+    <li className="relative overflow-hidden rounded-xl border border-border/70 bg-card shadow-sm">
       <div
-        className={`absolute inset-0 origin-left transition-transform duration-300 ${meta.fill}`}
+        className={cn('absolute inset-0 origin-left transition-transform duration-300', meta.fill)}
         style={{ transform: `scaleX(${video.progress / 100})` }}
       />
-      <div className="relative flex items-center gap-2 px-2.5 py-2">
+      <div className="relative flex items-center gap-2.5 px-3 py-2">
         <div className="min-w-0 flex-1">
-          <p className="m-0 truncate text-xs text-slate-200" title={video.filename}>
+          <p className="truncate text-xs font-medium text-foreground" title={video.filename}>
             {video.filename}
           </p>
-          <p className={`tnum m-0 mt-0.5 font-mono text-[10px] ${meta.text}`}>
-            {video.progress}% · {meta.label}
-          </p>
+          <div className="mt-1 flex items-center gap-1.5">
+            <Badge variant={meta.badge}>{meta.label}</Badge>
+            <span className="tnum font-mono text-[10px] text-muted-foreground">
+              {video.progress}%
+            </span>
+          </div>
         </div>
-        <button
-          type="button"
+        <Button
+          variant="ghost"
+          size="icon-xs"
+          title="移除"
           onClick={() => {
             removeVideo(idx)
           }}
-          className="flex cursor-pointer items-center border-0 bg-transparent p-1 text-slate-500 transition-transform hover:scale-125 hover:text-rose-400"
+          className="text-muted-foreground"
         >
-          <XCircle size={18} />
-        </button>
+          <XIcon />
+        </Button>
       </div>
     </li>
   )

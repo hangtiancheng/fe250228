@@ -1,23 +1,30 @@
-import { resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'electron-vite'
 
+const sharedAlias = {
+  '@main': fileURLToPath(new URL('src/main', import.meta.url)),
+  '@preload': fileURLToPath(new URL('src/preload', import.meta.url)),
+  '@renderer': fileURLToPath(new URL('src/renderer/src', import.meta.url))
+}
+
 export default defineConfig({
-  main: {},
-  preload: {},
+  main: {
+    resolve: {
+      alias: sharedAlias
+    }
+  },
+  preload: {
+    resolve: {
+      alias: sharedAlias
+    }
+  },
   renderer: {
     resolve: {
-      alias: {
-        '@renderer': resolve('src/renderer/src')
-      }
+      alias: sharedAlias
     },
-    plugins: [
-      react(),
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      tailwindcss()
-    ]
+    plugins: [react(), tailwindcss()]
   }
 })

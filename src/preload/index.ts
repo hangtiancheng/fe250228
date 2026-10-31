@@ -6,11 +6,12 @@ import type { IConvertSettings, IVideoItem, VideoState } from '../main/types'
 
 const api = {
   convert: async (videoItem: IVideoItem, settings: IConvertSettings): Promise<void> => {
-    return ipcRenderer.invoke('convertChan', videoItem, settings)
+    await ipcRenderer.invoke('convertChan', videoItem, settings)
   },
 
   selectDir: async (): Promise<string> => {
-    return ipcRenderer.invoke('selectDirChan')
+    const dir: unknown = await ipcRenderer.invoke('selectDirChan')
+    return typeof dir === 'string' ? dir : ''
   },
 
   getFilePath: (file: File): string => {
@@ -20,11 +21,7 @@ const api = {
   subscribeMain: (callback: (type_: VideoState, replyVal_?: unknown) => void): void => {
     ipcRenderer.on(
       'mainPublishChan',
-      (
-        _event: IpcRendererEvent,
-        type: (typeof callback.arguments)[1],
-        replyVal?: (typeof callback.arguments)[2]
-      ) => {
+      (_event: IpcRendererEvent, type: VideoState, replyVal?: unknown) => {
         callback(type, replyVal)
       }
     )

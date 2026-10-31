@@ -33,7 +33,7 @@ function callConvert(): void {
   convertingFilepath = video.filepath
   patchVideo(video.filepath, { state: 'convert', progress: 0 })
   const { size, frame, outputDir } = useSettingsStore.getState()
-  window.api.convert({ ...video, state: 'convert' }, { size, frame, outputDir })
+  void window.api.convert({ ...video, state: 'convert' }, { size, frame, outputDir })
 }
 
 export function stopConvert(): void {

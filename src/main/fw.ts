@@ -7,7 +7,7 @@ import type { IpcMainInvokeEvent } from 'electron'
 import { app, BrowserWindow } from 'electron'
 import ffmpeg from 'fluent-ffmpeg'
 
-import type { ErrorReplyVal, IConvertSettings, IVideoItem } from './types'
+import type { IConvertSettings, IVideoItem } from './types'
 
 ffmpeg.setFfmpegPath(ffmpegPath.replace('app.asar', 'app.asar.unpacked'))
 ffmpeg.setFfprobePath(ffprobePath.replace('app.asar', 'app.asar.unpacked'))
@@ -42,7 +42,7 @@ export default class FfmpegWrapper {
   convert() {
     try {
       this.outputPath = this.setOutputPath()
-    } catch (_err) {
+    } catch {
       return
     }
     this.ffmpeg
