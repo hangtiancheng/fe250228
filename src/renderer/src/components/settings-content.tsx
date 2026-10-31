@@ -1,6 +1,7 @@
-import { useState } from 'react'
 import { Button, Input, Select } from 'antd'
 import { XCircle } from 'lucide-react'
+import { useState } from 'react'
+
 import { addFrame, addSize, removeItem } from '../hooks/use-settings'
 import { useSettingsStore } from '../store/use-settings-store'
 
@@ -22,8 +23,11 @@ export default function SettingsContent({ type, placeholder }: SettingsContentPr
   const options = (isSize ? sizeOptions : frameOptions).map((v) => ({ value: v, label: `${v}` }))
 
   const handleAdd = (): void => {
-    if (isSize) addSize(newItem)
-    else addFrame(newItem)
+    if (isSize) {
+      addSize(newItem)
+    } else {
+      addFrame(newItem)
+    }
     setNewItem('')
   }
 
@@ -31,7 +35,9 @@ export default function SettingsContent({ type, placeholder }: SettingsContentPr
     <div className="flex flex-col gap-2">
       <Select
         value={isSize ? size : frame}
-        onChange={(v) => (isSize ? setSize(v as string) : setFrame(v as number))}
+        onChange={(v) => {
+          isSize ? setSize(v as string) : setFrame(v as number)
+        }}
         placeholder={isSize ? '选择分辨率' : '选择帧数'}
         options={options}
         optionRender={(option, { index }) => (
@@ -53,7 +59,9 @@ export default function SettingsContent({ type, placeholder }: SettingsContentPr
       <div className="flex gap-2">
         <Input
           value={newItem}
-          onChange={(e) => setNewItem(e.target.value)}
+          onChange={(e) => {
+            setNewItem(e.target.value)
+          }}
           onPressEnter={handleAdd}
           allowClear
           placeholder={placeholder}

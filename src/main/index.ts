@@ -1,6 +1,8 @@
-import { app, shell, BrowserWindow } from 'electron'
 import { join } from 'path'
+
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import { app, shell, BrowserWindow } from 'electron'
+
 import icon from '../../resources/icon.svg?asset'
 import './ipc'
 
@@ -28,8 +30,8 @@ function createWindow(): void {
     shell.openExternal(details.url)
     return { action: 'deny' }
   })
-  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
+  if (is.dev && process.env.ELECTRON_RENDERER_URL) {
+    mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL)
   } else {
     mainWindow.loadFile(join(import.meta.dirname, '../renderer/index.html'))
   }

@@ -1,5 +1,6 @@
-import { ElectronAPI } from '@electron-toolkit/preload'
-import { IConvertSettings, IVideoItem, VideoState } from '../main/types'
+import type { ElectronAPI } from '@electron-toolkit/preload'
+
+import type { IConvertSettings, IVideoItem, VideoState } from '../main/types'
 
 declare global {
   interface Window {

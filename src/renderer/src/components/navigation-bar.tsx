@@ -10,13 +10,15 @@ const links = [
 
 export default function NavigationBar({ view, onNavigate }: NavigationBarProps): JSX.Element {
   return (
-    <header className="drag flex items-center justify-between border-b border-ink-600/60 bg-ink-950/80 px-4 py-3">
+    <header className="drag border-ink-600/60 bg-ink-950/80 flex items-center justify-between border-b px-4 py-3">
       <button
         type="button"
-        onClick={() => onNavigate('home')}
+        onClick={() => {
+          onNavigate('home')
+        }}
         className="no-drag flex cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-sm font-semibold tracking-widest text-slate-100"
       >
-        <span className="h-2 w-2 animate-pulse rounded-full bg-amber-glow" />
+        <span className="bg-amber-glow h-2 w-2 animate-pulse rounded-full" />
         视频转码
       </button>
 
@@ -25,10 +27,12 @@ export default function NavigationBar({ view, onNavigate }: NavigationBarProps):
           <button
             key={link.key}
             type="button"
-            onClick={() => onNavigate(link.key)}
+            onClick={() => {
+              onNavigate(link.key)
+            }}
             className={`cursor-pointer rounded-md border-0 px-2.5 py-1 text-xs transition-colors ${
               view === link.key
-                ? 'bg-amber-glow/15 font-medium text-amber-glow'
+                ? 'bg-amber-glow/15 text-amber-glow font-medium'
                 : 'bg-transparent text-slate-400 hover:text-slate-200'
             }`}
           >

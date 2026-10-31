@@ -1,7 +1,9 @@
-import { ipcMain, IpcMainInvokeEvent } from 'electron'
-import FfmpegWrapper from './fw'
-import { IConvertSettings, IVideoItem } from './types'
+import type { IpcMainInvokeEvent } from 'electron'
+import { ipcMain } from 'electron'
+
 import { selectDir } from './dir'
+import FfmpegWrapper from './fw'
+import type { IConvertSettings, IVideoItem } from './types'
 
 let ffmpegWrapper: FfmpegWrapper | undefined = undefined
 

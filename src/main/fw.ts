@@ -1,10 +1,13 @@
+import { existsSync, unlink } from 'node:fs'
+import path from 'node:path'
+
 import { path as ffmpegPath } from '@ffmpeg-installer/ffmpeg'
 import { path as ffprobePath } from '@ffprobe-installer/ffprobe'
+import type { IpcMainInvokeEvent } from 'electron'
+import { app, BrowserWindow } from 'electron'
 import ffmpeg from 'fluent-ffmpeg'
-import path from 'node:path'
-import { app, BrowserWindow, IpcMainInvokeEvent } from 'electron'
-import { ErrorReplyVal, IConvertSettings, IVideoItem } from './types'
-import { existsSync, unlink } from 'node:fs'
+
+import type { ErrorReplyVal, IConvertSettings, IVideoItem } from './types'
 
 ffmpeg.setFfmpegPath(ffmpegPath.replace('app.asar', 'app.asar.unpacked'))
 ffmpeg.setFfprobePath(ffprobePath.replace('app.asar', 'app.asar.unpacked'))
@@ -26,14 +29,14 @@ export default class FfmpegWrapper {
   private setOutputPath() {
     const { size, frame } = this.settings
     const { name } = path.parse(this.videoItem.filename)
-    if (!this.settings.outputDir || !existsSync(this.settings.outputDir!)) {
+    if (!this.settings.outputDir || !existsSync(this.settings.outputDir)) {
       this.window.webContents.send('mainPublishChan', 'error', {
         code: 0x0,
         detail: app.getPath('downloads')
-      } as ErrorReplyVal)
+      })
       throw new Error('Output dir does not exist')
     }
-    return path.join(this.settings.outputDir!, `${name}-${size}-${frame}-${Date.now()}.mp4`)
+    return path.join(this.settings.outputDir, `${name}-${size}-${frame}-${Date.now()}.mp4`)
   }
 
   convert() {
@@ -80,6 +83,6 @@ export default class FfmpegWrapper {
     this.ffmpeg.kill('SIGKILL')
     this.window.webContents.send('mainPublishChan', 'error', {
       code: 0x1
-    } as ErrorReplyVal)
+    })
   }
 }

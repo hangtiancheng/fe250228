@@ -1,11 +1,14 @@
-import { useEffect, useRef, useState } from 'react'
 import { Plus, RotateCw } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+
 import { startConvert, subscribeMainOnce, useConvertStore } from '../hooks/use-convert'
 import { addVideo } from '../hooks/use-video'
 
 function addFiles(files: FileList | File[]): void {
   for (const file of Array.from(files)) {
-    if (!file.type.startsWith('video/')) continue
+    if (!file.type.startsWith('video/')) {
+      continue
+    }
     addVideo({
       filename: file.name,
       filepath: window.api.getFilePath(file),
@@ -33,7 +36,9 @@ export default function CeilButtons(): JSX.Element {
         multiple
         className="hidden"
         onChange={(e) => {
-          if (e.target.files) addFiles(e.target.files)
+          if (e.target.files) {
+            addFiles(e.target.files)
+          }
           e.target.value = ''
         }}
       />
@@ -46,15 +51,17 @@ export default function CeilButtons(): JSX.Element {
           e.preventDefault()
           setDragOver(true)
         }}
-        onDragLeave={() => setDragOver(false)}
+        onDragLeave={() => {
+          setDragOver(false)
+        }}
         onDrop={(e) => {
           e.preventDefault()
           setDragOver(false)
           addFiles(e.dataTransfer.files)
         }}
-        className={`flex h-20 w-20 cursor-pointer items-center justify-center rounded-2xl border border-dashed bg-ink-800 text-slate-300 transition-all hover:border-amber-glow hover:text-amber-glow ${
+        className={`bg-ink-800 hover:border-amber-glow hover:text-amber-glow flex h-20 w-20 cursor-pointer items-center justify-center rounded-2xl border border-dashed text-slate-300 transition-all ${
           dragOver
-            ? 'scale-105 border-amber-glow text-amber-glow shadow-[0_0_24px_rgba(245,166,35,0.25)]'
+            ? 'border-amber-glow text-amber-glow scale-105 shadow-[0_0_24px_rgba(245,166,35,0.25)]'
             : 'border-ink-600'
         }`}
       >
@@ -66,10 +73,10 @@ export default function CeilButtons(): JSX.Element {
         title="开始转码"
         disabled={isConverting}
         onClick={startConvert}
-        className={`flex h-20 w-20 items-center justify-center rounded-2xl border border-solid bg-ink-800 transition-all ${
+        className={`bg-ink-800 flex h-20 w-20 items-center justify-center rounded-2xl border border-solid transition-all ${
           isConverting
-            ? 'cursor-wait border-amber-glow/50 text-amber-glow shadow-[0_0_24px_rgba(245,166,35,0.25)]'
-            : 'cursor-pointer border-ink-600 text-slate-300 hover:border-amber-glow hover:text-amber-glow'
+            ? 'border-amber-glow/50 text-amber-glow cursor-wait shadow-[0_0_24px_rgba(245,166,35,0.25)]'
+            : 'border-ink-600 hover:border-amber-glow hover:text-amber-glow cursor-pointer text-slate-300'
         }`}
       >
         <RotateCw size={42} className={isConverting ? 'animate-spin' : ''} />

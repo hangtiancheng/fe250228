@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+
 import { feedback } from '../feedback'
 import { useSettingsStore } from '../store/use-settings-store'
 import { useVideoStore } from '../store/use-video-store'
@@ -14,7 +15,9 @@ let convertingFilepath = ''
 let subscribed = false
 
 export function startConvert(): void {
-  if (useConvertStore.getState().isConverting) return
+  if (useConvertStore.getState().isConverting) {
+    return
+  }
   useConvertStore.setState({ isConverting: true })
   callConvert()
 }
@@ -23,7 +26,7 @@ function callConvert(): void {
   const { videoList, patchVideo } = useVideoStore.getState()
   const video = videoList.find((v) => v.state === 'pending')
   if (!video) {
-    feedback.message.warning({ content: '请添加视频', key: 'convert' })
+    feedback.message.warning('请添加视频', 'convert')
     useConvertStore.setState({ isConverting: false })
     return
   }
@@ -38,7 +41,9 @@ export function stopConvert(): void {
 }
 
 export function subscribeMainOnce(): void {
-  if (subscribed) return
+  if (subscribed) {
+    return
+  }
   subscribed = true
 
   window.api.subscribeMain((type, replyVal) => {
@@ -54,12 +59,17 @@ export function subscribeMainOnce(): void {
       case 'done': {
         const filepath = replyVal as string
         const video = videoList.find((v) => v.filepath === filepath)
-        if (!video) break
+        if (!video) {
+          break
+        }
         patchVideo(filepath, { state: 'done', progress: 100 })
         feedback.message.success(`${video.filename} 转码完成`)
         const next = useVideoStore.getState().videoList.find((v) => v.state === 'pending')
-        if (next) callConvert()
-        else useConvertStore.setState({ isConverting: false })
+        if (next) {
+          callConvert()
+        } else {
+          useConvertStore.setState({ isConverting: false })
+        }
         break
       }
 
@@ -69,10 +79,10 @@ export function subscribeMainOnce(): void {
         if (code === 0x0) {
           patchVideo(convertingFilepath, { state: 'pending', progress: 0 })
           useSettingsStore.getState().setOutputDir(detail ?? '')
-          feedback.message.error({ content: '请选择输出目录', key: 'convert' })
+          feedback.message.error('请选择输出目录', 'convert')
         } else {
           patchVideo(convertingFilepath, { state: 'error' })
-          feedback.message.warning({ content: '转码结束', key: 'convert' })
+          feedback.message.warning('转码结束', 'convert')
         }
         break
       }

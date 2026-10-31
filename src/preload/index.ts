@@ -1,6 +1,8 @@
-import { contextBridge, ipcRenderer, IpcRendererEvent, webUtils } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
-import { IConvertSettings, IVideoItem, VideoState } from '../main/types'
+import type { IpcRendererEvent } from 'electron'
+import { contextBridge, ipcRenderer, webUtils } from 'electron'
+
+import type { IConvertSettings, IVideoItem, VideoState } from '../main/types'
 
 const api = {
   convert: async (videoItem: IVideoItem, settings: IConvertSettings): Promise<void> => {
@@ -40,8 +42,8 @@ if (process.contextIsolated) {
     console.error(error)
   }
 } else {
-  // @ts-ignore (define in dts)
+  // @ts-expect-error (define in dts)
   window.electron = electronAPI
-  // @ts-ignore (define in dts)
+  // @ts-expect-error (define in dts)
   window.api = api
 }

@@ -1,13 +1,10 @@
 @import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-ink-950: #0c0d10;
-  --color-ink-900: #101116;
-  --color-ink-800: #16181f;
-  --color-ink-700: #1e2029;
-  --color-ink-600: #2a2d3a;
-  --color-amber-glow: #f5a623;
-
   --font-sans:
     'Yukino', 'Maple Mono', Menlo, 'Cascadia Code', 'Sarasa Gothic SC', 'PingFang SC',
     'Microsoft YaHei', sans-serif;
@@ -16,13 +13,93 @@
     'Microsoft YaHei', monospace;
 }
 
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
 :root {
-  color-scheme: dark;
+  --radius: 0.75rem;
+  --background: oklch(0.985 0.007 85);
+  --foreground: oklch(0.29 0.028 55);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.29 0.028 55);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.29 0.028 55);
+  --primary: oklch(0.77 0.135 68);
+  --primary-foreground: oklch(0.27 0.055 50);
+  --secondary: oklch(0.96 0.015 80);
+  --secondary-foreground: oklch(0.36 0.04 55);
+  --muted: oklch(0.96 0.013 82);
+  --muted-foreground: oklch(0.55 0.028 60);
+  --accent: oklch(0.95 0.028 78);
+  --accent-foreground: oklch(0.36 0.05 55);
+  --destructive: oklch(0.6 0.21 25);
+  --destructive-foreground: oklch(0.985 0.01 25);
+  --warning: oklch(0.8 0.155 82);
+  --warning-foreground: oklch(0.32 0.06 60);
+  --success: oklch(0.68 0.15 155);
+  --success-foreground: oklch(0.985 0.01 155);
+  --border: oklch(0.925 0.013 80);
+  --input: oklch(0.925 0.013 80);
+  --ring: oklch(0.77 0.135 68);
+  --chart-1: oklch(0.77 0.135 68);
+  --chart-2: oklch(0.68 0.15 155);
+  --chart-3: oklch(0.6 0.21 25);
+  --chart-4: oklch(0.7 0.12 200);
+  --chart-5: oklch(0.65 0.2 300);
+  color-scheme: light;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html,
+  body,
+  #app {
+    @apply h-full overflow-hidden bg-background text-foreground;
+  }
+  body {
+    @apply antialiased;
+  }
 }
 
 #app {
-  min-height: 100vh;
-  background: radial-gradient(120% 55% at 50% -10%, rgba(245, 166, 35, 0.08), transparent 60%);
+  background: radial-gradient(130% 60% at 50% -12%, oklch(0.77 0.135 68 / 0.14), transparent 62%);
 }
 
 .drag {
@@ -37,15 +114,19 @@
   font-variant-numeric: tabular-nums;
 }
 
+::selection {
+  background-color: oklch(0.77 0.135 68 / 0.25);
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 3px;
-  background-color: rgba(148, 163, 184, 0.25);
+  background-color: oklch(0.72 0.04 65 / 0.35);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(148, 163, 184, 0.45);
+  background-color: oklch(0.68 0.06 62 / 0.55);
 }

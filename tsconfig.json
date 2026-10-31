@@ -7,5 +7,12 @@
     {
       "path": "./tsconfig.web.json"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "paths": {
+      "@main/*": ["./src/main/*"],
+      "@preload/*": ["./src/preload/*"],
+      "@renderer/*": ["./src/renderer/src/*"]
+    }
+  }
 }

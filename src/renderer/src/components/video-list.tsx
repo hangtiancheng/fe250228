@@ -1,4 +1,5 @@
 import { useVideoStore } from '../store/use-video-store'
+
 import VideoItem from './video-item'
 
 export default function VideoList(): JSX.Element {
@@ -6,7 +7,7 @@ export default function VideoList(): JSX.Element {
 
   if (videoList.length === 0) {
     return (
-      <div className="flex h-80 items-center justify-center rounded-xl border border-dashed border-ink-600 text-xs text-slate-500">
+      <div className="border-ink-600 flex h-80 items-center justify-center rounded-xl border border-dashed text-xs text-slate-500">
         请添加视频
       </div>
     )

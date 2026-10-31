@@ -1,6 +1,8 @@
 import { useState } from 'react'
-import NavigationBar from './components/navigation-bar'
+
+import ConfirmDialog from './components/confirm-dialog'
 import CopyrightInfo from './components/copyright-info'
+import NavigationBar from './components/navigation-bar'
 import ConvertHome from './views/convert-home'
 import ConvertSettings from './views/convert-settings'
 
@@ -14,6 +16,7 @@ export default function App(): JSX.Element {
         {view === 'home' ? <ConvertHome /> : <ConvertSettings />}
       </main>
       <CopyrightInfo />
+      <ConfirmDialog />
     </div>
   )
 }

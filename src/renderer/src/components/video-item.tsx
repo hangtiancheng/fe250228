@@ -1,4 +1,5 @@
 import { XCircle } from 'lucide-react'
+
 import { removeVideo } from '../hooks/use-video'
 import type { IVideoItem, VideoState } from '../types'
 
@@ -18,7 +19,7 @@ export default function VideoItem({ video, idx }: VideoItemProps): JSX.Element {
   const meta = stateMeta[video.state]
 
   return (
-    <li className="relative overflow-hidden rounded-lg border border-ink-600/50 bg-ink-800">
+    <li className="border-ink-600/50 bg-ink-800 relative overflow-hidden rounded-lg border">
       <div
         className={`absolute inset-0 origin-left transition-transform duration-300 ${meta.fill}`}
         style={{ transform: `scaleX(${video.progress / 100})` }}
@@ -34,7 +35,9 @@ export default function VideoItem({ video, idx }: VideoItemProps): JSX.Element {
         </div>
         <button
           type="button"
-          onClick={() => removeVideo(idx)}
+          onClick={() => {
+            removeVideo(idx)
+          }}
           className="flex cursor-pointer items-center border-0 bg-transparent p-1 text-slate-500 transition-transform hover:scale-125 hover:text-rose-400"
         >
           <XCircle size={18} />

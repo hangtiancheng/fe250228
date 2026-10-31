@@ -1,4 +1,5 @@
 import { Select } from 'antd'
+
 import { useSettingsStore } from '../store/use-settings-store'
 
 export default function BasicSettings(): JSX.Element {

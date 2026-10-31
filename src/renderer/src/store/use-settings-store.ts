@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+
 import { defaultFrame, defaultFrameOptions, defaultSize, defaultSizeOptions } from '../constants'
 
 interface SettingsStore {
@@ -20,9 +21,19 @@ export const useSettingsStore = create<SettingsStore>()((set) => ({
   frameOptions: [...defaultFrameOptions],
   frame: defaultFrame,
   outputDir: '',
-  setSize: (size) => set({ size }),
-  setFrame: (frame) => set({ frame }),
-  setOutputDir: (outputDir) => set({ outputDir }),
-  setSizeOptions: (sizeOptions) => set({ sizeOptions }),
-  setFrameOptions: (frameOptions) => set({ frameOptions })
+  setSize: (size) => {
+    set({ size })
+  },
+  setFrame: (frame) => {
+    set({ frame })
+  },
+  setOutputDir: (outputDir) => {
+    set({ outputDir })
+  },
+  setSizeOptions: (sizeOptions) => {
+    set({ sizeOptions })
+  },
+  setFrameOptions: (frameOptions) => {
+    set({ frameOptions })
+  }
 }))

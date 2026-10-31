@@ -1,4 +1,5 @@
 import { Button, Input } from 'antd'
+
 import SettingsCard from '../components/settings-card'
 import SettingsContent from '../components/settings-content'
 import { useSettingsStore } from '../store/use-settings-store'
@@ -9,7 +10,9 @@ export default function ConvertSettings(): JSX.Element {
 
   const handleSelectDir = async (): Promise<void> => {
     const dir = await window.api.selectDir()
-    if (dir) setOutputDir(dir)
+    if (dir) {
+      setOutputDir(dir)
+    }
   }
 
   return (
