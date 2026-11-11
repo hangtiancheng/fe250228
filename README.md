@@ -66,14 +66,14 @@ The app follows Electron's classic three-process model.
 │ Main process (src/main)                                          │
 │  window lifecycle · native dialogs · file IO · FFmpeg engine     │
 └──────────────────────────────────────────────┬───────────────────┘
-                ^ invoke / send                │ push (mainPublishChan)
-┌───────────────┴──────────────────────────────V───────────────────┐
+                ^ invoke / send                V push (mainPublishChan)
+┌───────────────┴──────────────────────────────────────────────────┐
 │ Preload (src/preload)                                            │
-│  contextBridge → window.api                                      │
+│  contextBridge → window.api                                     │
 │  (convert · selectDir · getFilePath · subscribeMain · stop)      │
 └──────────────────────────────────────────────┬───────────────────┘
-                ^ window.api.*                 │ events
-┌───────────────┴──────────────────────────────V───────────────────┐
+                ^ window.api.*                 V events
+┌───────────────┴──────────────────────────────────────────────────┐
 │ Renderer (src/renderer)                                          │
 │  React 18 SPA · Zustand stores · Ant Design dark theme           │
 └──────────────────────────────────────────────────────────────────┘
