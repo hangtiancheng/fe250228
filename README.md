@@ -115,14 +115,14 @@ fe250228
 │   │   ├── index.ts           # contextBridge — selectively exposes window.api
 │   │   └── index.d.ts         # Type declarations for window.api
 │   └── renderer/src           # Renderer process (React SPA)
-│       ├── main.tsx           # React root · antd dark theme & zh-CN locale
+│       ├── main.tsx           # React root & zh-CN locale
 │       ├── App.tsx            # View switching (home / settings)
 │       ├── views/             # ConvertHome · ConvertSettings
 │       ├── components/        # Nav bar, video list, action buttons, settings cards…
 │       ├── hooks/             # use-convert (serial queue) · use-video · use-settings
 │       ├── store/             # Zustand stores (video list, settings)
 │       ├── constants/         # Built-in resolution / frame-rate presets
-│       └── feedback.ts        # antd message/modal bridge for non-component code
+│       └── feedback.ts        # message/modal bridge for non-component code
 ├── resources/                 # App icon
 ├── electron.vite.config.ts    # main / preload / renderer build config
 ├── electron-builder.yml       # Packaging, asarUnpack & publish config
